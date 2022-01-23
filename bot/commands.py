@@ -37,7 +37,7 @@ async def send_mail_command(message: types.Message) -> None:
     """Выполнить команду по отправке сообщения."""
     flags = 't|r|w'  # список флагов
     _, raw_message = message.get_full_command()
-    msg = re.match(r'(.+?)(?= -\w)', raw_message).group()
+    msg = re.match(fr'(.+?)(?= -({flags}))', raw_message).group()
     key_val = re.split(fr' -({flags}) ', raw_message.replace(msg, ''))[1:]
     args = dict(zip(key_val[::2], key_val[1::2]))
 
